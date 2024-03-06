@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visitor Register</title>
+    <link rel="stylesheet" href="static/style.css">
+
+</head>
+<body>
+    <center>
+        <h1>Visitor Register</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            <label for="name">Visitor Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="address">Visitor Address:</label>
+            <input type="text" id="address" name="address" required><br><br>
+            <label for="mobile_number">Visitor Mobile Number:</label>
+            <input type="text" id="mobile_number" name="mobile_number" pattern="[0-9]+" title="Please enter a valid number" required><br><br>
+            <input type="submit" value="Add Visitor">
+
+        </form>
+
+        <h2 style="color: green;">Visitor List</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Visitor Name</th>
+                    <th>Visitor Address</th>
+                    <th>Visitor Mobile Number</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for visitor in visitors %}
+                <tr>
+                    <td>{{ visitor.name }}</td>
+                    <td>{{ visitor.address }}</td>
+                    <td>{{ visitor.mobile_number }}</td>
+                    <td><a href="/delete/{{visitor.id}}">Delete</a> | <a href=/update/{{visitor.id}}>Update</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </center>
+</body>
+</html>
